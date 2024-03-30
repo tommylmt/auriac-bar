@@ -1,0 +1,24 @@
+name: Publish Docker image
+
+on:
+    push:
+        tags:
+            - v.*
+
+env:
+    IMAGE_NAME: auriac
+
+jobs:
+    publish:
+        runs-on: debian-latest
+        permissions:
+            packages: write
+            contents: read
+        steps:
+            - uses: actions/checkout@v4
+            - name: Login to Package Registry
+              run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ --password-stdin
+            - name: Build the image
+              run: docker build -t ghcr.io/${{ github.repository_owner }}/$IMAGE_NAME . --file Dockerfile
+            - name: Push image
+              run: docker push ghcr.io/${{ github.repository_owner }}/$IMAGE_NAME
