@@ -3,7 +3,7 @@ name: Publish Docker image
 on:
     push:
         tags:
-            - v.*
+            - v*
 
 env:
     IMAGE_NAME: auriac
