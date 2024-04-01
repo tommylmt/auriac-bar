@@ -14,11 +14,12 @@ read_on_tip() {
 }
 
 while true; do
-    read -n 1 input
-
-    if [ "$input" = $KEY_CODE ]; then
+    if [ $(gpio read $KEY_CODE) -eq 1 ]; then
         turn_down
         read_on_tip
         turn_up
+
+        # Anti processor killer
+        sleep 0.3
     fi
 done
