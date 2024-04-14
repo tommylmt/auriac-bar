@@ -6,4 +6,4 @@ services:
         container_name: 'auriac_tip_listener'
         environment:
             - DOWN_VOLUME=30%
-            - KEY_CODE="a"
+            - KEY_CODE=a
