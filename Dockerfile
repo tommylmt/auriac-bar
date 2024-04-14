@@ -1,7 +1,7 @@
-FROM debian:bookworm AS main
+FROM alpine:latest AS main
 
-RUN apt-get update && apt-get upgrade;
-RUN apt-get install mpg123 alsa-utils -y;
+RUN apk update && apk upgrade;
+RUN apk add --no-cache mpg123 alsa-utils alsaconf;
 
 COPY auriac_buzzer.sh /usr/local/bin/tipsbuzz
 RUN chmod +x /usr/local/bin/tipsbuzz
